@@ -23,43 +23,41 @@ public interface IRepository<T> where T : class
 public class Repository<T> : IRepository<T> where T : CoreEntity
 {
     private readonly ApplicationContext _context;
-    private readonly DbSet<T> _dbSet;
 
-    public Repository(ApplicationContext context, DbSet<T> dbSet)
+    public Repository(ApplicationContext context)
     {
         _context = context;
-        _dbSet = dbSet;
     }
 
     public void AddAsync(T entity)
     {
-        _dbSet.Add(entity);
+        _context.Set<T>().Add(entity);
     }
 
     public async Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate)
     {
-        return await _dbSet
+        return await _context.Set<T>()
             .Where(predicate)
             .ToListAsync();
     }
 
-    public Task<IEnumerable<T>> GetAllAsync()
+    public async Task<IEnumerable<T>> GetAllAsync()
     {
-        return _dbSet.ToList();
+        return await _context.Set<T>().ToListAsync();
     }
 
     public async Task<T?> GetByExternalIdAsync(Guid externalId)
     {
-        return await _dbSet.FirstOrDefaultAsync(x => x.ExternalId.Equals(externalId));
+        return await _context.Set<T>().FirstOrDefaultAsync(x => x.ExternalId.Equals(externalId));
     }
 
     public async Task<T?> GetByIdAsync(int id)
     {
-        return await _dbSet.FindAsync(id);
+        return await _context.Set<T>().FindAsync(id);
     }
 
     public async void RemoveAsync(T entity)
     {
-        await _dbSet.FindAsync(entity);
+        await _context.Set<T>().FindAsync(entity);
     }
 }
