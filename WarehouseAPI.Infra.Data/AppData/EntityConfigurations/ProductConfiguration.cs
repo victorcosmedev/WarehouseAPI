@@ -15,8 +15,7 @@ namespace WarehouseAPI.Infra.Data.AppData.EntityConfigurations
         {
             builder.HasKey(p => p.Id);
 
-            builder
-                .HasIndex(p => p.ExternalId)
+            builder.HasIndex(p => p.ExternalId)
                 .IsUnique()
                 .HasDatabaseName("UX_Product_ExternalId");
         }
