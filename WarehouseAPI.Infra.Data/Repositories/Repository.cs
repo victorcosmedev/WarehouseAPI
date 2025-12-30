@@ -10,16 +10,6 @@ using WarehouseAPI.Infra.Data.AppData;
 
 namespace WarehouseAPI.Domain.Interfaces;
 
-public interface IRepository<T> where T : class
-{
-    Task<T?> GetByIdAsync(int id);
-    Task<T?> GetByExternalIdAsync(Guid externalId);
-    void AddAsync(T entity);
-    void RemoveAsync(T entity);
-    Task<IEnumerable<T>> GetAllAsync();
-    Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate);
-}
-
 public class Repository<T> : IRepository<T> where T : CoreEntity
 {
     private readonly ApplicationContext _context;
