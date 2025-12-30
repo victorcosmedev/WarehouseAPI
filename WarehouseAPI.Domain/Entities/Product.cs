@@ -15,6 +15,7 @@ namespace WarehouseAPI.Domain.Entities
             Description = description;
             Stock = stock;
             Price = price;
+            Active = true;
         }
         
 
