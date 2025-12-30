@@ -1,10 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WarehouseAPI.Domain.Entities;
 
 namespace WarehouseAPI.Infra.Data.AppData
 {
@@ -12,12 +6,6 @@ namespace WarehouseAPI.Infra.Data.AppData
     {
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {
-        }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Product>()
-                .HasKey(p => p.Id)
-                .
         }
     }
 }
