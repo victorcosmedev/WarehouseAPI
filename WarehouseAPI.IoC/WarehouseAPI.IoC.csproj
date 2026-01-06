@@ -7,4 +7,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\WarehouseAPI.Application\WarehouseAPI.Application.csproj" />
+    <ProjectReference Include="..\WarehouseAPI.Domain\WarehouseAPI.Domain.csproj" />
+    <ProjectReference Include="..\WarehouseAPI.Infra.Data\WarehouseAPI.Infra.Data.csproj" />
+  </ItemGroup>
+
 </Project>
