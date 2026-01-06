@@ -34,7 +34,7 @@ namespace WarehouseAPI.Domain.Entities
         public bool Active { get; private set; }
 
 
-        private void EnsureValidState()
+        protected override void EnsureValidState()
         {
             DomainException.When(string.IsNullOrEmpty(Name), $"{nameof(Name)} cannot be empty.");
             DomainException.When(string.IsNullOrEmpty(Description), $"{nameof(Description)} cannot be empty.");

@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 
 namespace WarehouseAPI.Domain.Entities
 {
-    public  class CoreEntity
+    public abstract class CoreEntity
     {
         public int Id { get; private set; }
         public Guid ExternalId { get; private set; }
+
+        protected abstract void EnsureValidState();
     }
 }
