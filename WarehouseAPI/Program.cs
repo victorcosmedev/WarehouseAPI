@@ -1,4 +1,7 @@
+using WarehouseAPI.IoC;
+
 var builder = WebApplication.CreateBuilder(args);
+Bootstrap.AddIoC(builder.Services, builder.Configuration);
 
 // Add services to the container.
 
