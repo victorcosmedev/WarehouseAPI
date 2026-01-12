@@ -48,7 +48,7 @@ public class Repository<T> : IRepository<T> where T : CoreEntity
         return await _context.Set<T>().FindAsync(id);
     }
 
-    public async void RemoveAsync(T entity)
+    public async Task RemoveAsync(T entity)
     {
         await _context.Set<T>().FindAsync(entity);
     }

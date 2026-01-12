@@ -8,7 +8,7 @@ namespace WarehouseAPI.Domain.Interfaces
         Task<T?> GetByIdAsync(int id);
         Task<T?> GetByExternalIdAsync(Guid externalId);
         Task<T> AddAsync(T entity);
-        void RemoveAsync(T entity);
+        Task RemoveAsync(T entity);
         Task<IEnumerable<T>> GetAllAsync();
         Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate);
     }
