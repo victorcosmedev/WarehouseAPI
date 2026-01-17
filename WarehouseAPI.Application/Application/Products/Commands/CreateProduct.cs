@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using System.Runtime.CompilerServices;
-using WarehouseAPI.Application.Application.Products.Mappers;
 using WarehouseAPI.Domain.Entities;
 using WarehouseAPI.Domain.Interfaces;
 
@@ -12,6 +11,11 @@ public record CreateProductCommand : IRequest<CreateProductResponse>
     public string Description { get; set; }
     public int Stock { get; set; }
     public decimal Price { get; set; }
+
+    public static Product ToEntity(CreateProductCommand command)
+    {
+        return new Product(command.Name, command.Description, command.Stock, command.Price);
+    }
 }
 
 public record CreateProductResponse
@@ -40,15 +44,18 @@ public record CreateProductResponse
 public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, CreateProductResponse>
 {
     private readonly IRepository<Product> _productRepository;
-    public CreateProductCommandHandler(IRepository<Product> productRepository)
+    private readonly IUnitOfWork _unitOfWork;
+    public CreateProductCommandHandler(IRepository<Product> productRepository, IUnitOfWork unitOfWork)
     {
         _productRepository = productRepository;
+        _unitOfWork = unitOfWork;
     }
     public async Task<CreateProductResponse> Handle(CreateProductCommand request, CancellationToken cancellationToken)
     {
         var product = new Product(request.Name, request.Description, request.Stock, request.Price);
         var entity = await _productRepository.AddAsync(product);
-
+        await _unitOfWork.CommitAsync();
+        
         return CreateProductResponse.FromEntity(entity);
     }
 }
