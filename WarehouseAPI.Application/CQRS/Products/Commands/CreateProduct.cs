@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 using WarehouseAPI.Domain.Entities;
 using WarehouseAPI.Domain.Interfaces;
 
-namespace WarehouseAPI.Application.Application.Products.Commands;
+namespace WarehouseAPI.Application.CQRS.Products.Commands;
 
 public record CreateProductCommand : IRequest<CreateProductResponse>
 {
